@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Almost Crazy About Books</title>
+
+  <style>
+    :root {
+      --deep-purple: #170021;
+      --purple: #2b0640;
+      --gold: #d9a729;
+      --soft-gold: #f6d77a;
+      --white: #fff7e8;
+      --panel: rgba(24, 0, 38, 0.82);
+      --panel-light: rgba(59, 10, 83, 0.72);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--white);
+      background:
+        linear-gradient(rgba(15, 0, 25, 0.45), rgba(15, 0, 25, 0.75)),
+        url("images/almost-crazy-bg.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      width: 100%;
+      padding: 18px 8%;
+      background: rgba(18, 0, 30, 0.92);
+      border-bottom: 1px solid rgba(217, 167, 41, 0.35);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--soft-gold);
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      color: var(--white);
+      opacity: 0.9;
+    }
+
+    nav a:hover {
+      color: var(--soft-gold);
+    }
+
+    .nav-button {
+      background: var(--gold);
+      color: #1a001f;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: bold;
+    }
+
+    .ticker {
+      overflow: hidden;
+      white-space: nowrap;
+      background: rgba(8, 0, 15, 0.9);
+      border-bottom: 1px solid rgba(217, 167, 41, 0.28);
+      color: var(--soft-gold);
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .ticker span {
+      display: inline-block;
+      padding: 10px 0;
+      animation: scroll 28s linear infinite;
+    }
+
+    @keyframes scroll {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    main {
+      padding: 70px 8% 50px;
+    }
+
+    .hero {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      background: var(--panel);
+      border: 1px solid rgba(217, 167, 41, 0.35);
+      border-radius: 22px;
+      box-shadow: 0 0 50px rgba(217, 167, 41, 0.16);
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 5.8rem);
+      color: var(--soft-gold);
+      text-shadow: 0 0 22px rgba(217, 167, 41, 0.45);
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+
+    .hero h2 {
+      font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+      color: var(--white);
+      font-family: Arial, sans-serif;
+      font-weight: normal;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto 30px;
+      font-family: Arial, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(255, 247, 232, 0.88);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      padding: 13px 24px;
+      border-radius: 999px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      border: 1px solid var(--gold);
+    }
+
+    .button.gold {
+      background: var(--gold);
+      color: #1a001f;
+    }
+
+    .button.outline {
+      color: var(--soft-gold);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 55px auto 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: var(--soft-gold);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .book-card {
+      background: var(--panel);
+      border: 1px solid rgba(217, 167, 41, 0.25);
+      border-radius: 18px;
+      padding: 24px;
+      min-height: 260px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .book-card h3 {
+      color: var(--soft-gold);
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .book-card .tag {
+      color: var(--gold);
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .book-card p {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: rgba(255, 247, 232, 0.86);
+      margin-bottom: 18px;
+    }
+
+    .small-link {
+      color: var(--soft-gold);
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    .about,
+    .newsletter {
+      background: var(--panel-light);
+      border: 1px solid rgba(217, 167, 41, 0.25);
+      border-radius: 20px;
+      padding: 34px;
+      text-align: center;
+    }
+
+    .about p,
+    .newsletter p {
+      max-width: 780px;
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+      line-height: 1.8;
+      color: rgba(255, 247, 232, 0.9);
+    }
+
+    .newsletter .button {
+      display: inline-block;
+      margin-top: 24px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 8%;
+      margin-top: 50px;
+      background: rgba(10, 0, 18, 0.92);
+      color: rgba(255, 247, 232, 0.72);
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(217, 167, 41, 0.25);
+    }
+
+    @media (max-width: 850px) {
+      header {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      main {
+        padding: 40px 5% 35px;
+      }
+
+      .hero {
+        padding: 42px 22px;
+      }
+
+      .book-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">📖 Almost Crazy About Books</div>
+
+    <nav>
+      <a href="#books">Books</a>
+      <a href="#about">About</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#contact" class="nav-button">Contact</a>
+    </nav>
+  </header>
+
+  <div class="ticker">
+    <span>
+      ✦ Dark Romance ✦ Paranormal Love ✦ Werewolves ✦ Fae Kings ✦ Hood Fantasy ✦ New Stories Coming Soon ✦ Join the Reader List ✦
+    </span>
+  </div>
+
+  <main>
+    <section class="hero">
+      <h1>Almost Crazy</h1>
+      <h2>About Books</h2>
+
+      <p>
+        Dark romance. Supernatural heat. Dangerous love.
+        Stories for readers who like their books intense, emotional,
+        a little haunted, and just crazy enough to keep turning the page.
+      </p>
+
+      <div class="buttons">
+        <a href="#books" class="button gold">Explore My Books</a>
+        <a href="#newsletter" class="button outline">Join My Newsletter</a>
+      </div>
+    </section>
+
+    <section id="books">
+      <h2 class="section-title">Featured Books</h2>
+
+      <div class="book-grid">
+        <div class="book-card">
+          <h3>Red Riding in the Hood</h3>
+          <div class="tag">Hood Fantasy Romance</div>
+          <p>
+            A bold, dangerous twist on wolves, loyalty, power, and love that bites back.
+          </p>
+          <a href="#" class="small-link">Read Now →</a>
+        </div>
+
+        <div class="book-card">
+          <h3>Daughter of the Wolf Veil</h3>
+          <div class="tag">Dark Paranormal Romance</div>
+          <p>
+            A hidden wolf. A stalking shadow. A truth that waits until the moon is ready.
+          </p>
+          <a href="#" class="small-link">Coming Soon →</a>
+        </div>
+
+        <div class="book-card">
+          <h3>Throne Beneath My Skin</h3>
+          <div class="tag">Dark Fae Romance</div>
+          <p>
+            A fae king. A hidden queen. A power buried beneath the skin.
+          </p>
+          <a href="#" class="small-link">Coming Soon →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <h2 class="section-title">About Almost Crazy</h2>
+
+      <p>
+        Almost Crazy writes dark romance, paranormal stories, supernatural drama,
+        and love stories with teeth. Her worlds are filled with obsession, magic,
+        danger, emotional chaos, and characters who should probably run… but don’t.
+      </p>
+    </section>
+
+    <section id="newsletter" class="newsletter">
+      <h2 class="section-title">Join the Reader List</h2>
+
+      <p>
+        Get release news, exclusive teasers, chapter previews, and first looks at upcoming books.
+      </p>
+
+      <a href="#" class="button gold">Join the List</a>
+    </section>
+
+    <section id="contact" class="newsletter">
+      <h2 class="section-title">Contact</h2>
+
+      <p>
+        For reader messages, book updates, or future collaborations, check back soon.
+        A contact form is coming next.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Almost Crazy About Books. All rights reserved.
+  </footer>
+</body>
+</html>
